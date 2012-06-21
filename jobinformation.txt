@@ -1,0 +1,19 @@
+jobs notes:
+
+admin:
+add job number (int)
+add job title: (text)
+add file: (only one file or zip)
+select lc/hs (default to lc)
+
+give web reference number to admin after submission
+
+user:
+type in job number, web reference, select lc/hs (default lc)
+
+job object
+use id key as web reference
+job number
+file (don't know how this works)
+bit for lc/hs
+bit for if it's been opened before
