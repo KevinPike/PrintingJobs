@@ -1,4 +1,9 @@
 from jobs.models import Job
 from django.contrib import admin
 
-admin.site.register(Job)
+class JobAdmin(admin.ModelAdmin):
+	list_display = ('number', 'id', 'title', 'type', 'file')
+	search_fields = ('number', 'title')
+	list_filter = ('id', 'number')
+
+admin.site.register(Job, JobAdmin)

@@ -1,9 +1,11 @@
 from django.db import models
+import os
 
 # Create your models here.
 
 class Job (models.Model) :
 	number = models.CharField('Job Number', max_length=8)
+	id = models.AutoField('Reference Number', primary_key=True) 
 	title = models.CharField('Job Title', max_length=20)
 	#description = models.CharField(max_length=200)
 	# true is lc, false is hs
@@ -12,8 +14,8 @@ class Job (models.Model) :
 			('HS', 'Harris Services'),
 	)
 	type = models.CharField('Job Type', max_length=2, choices=JOB_TYPES, )
-	file = models.FileField('Upload File', upload_to='/home/kevin/Videos')
+	file = models.FileField('Upload File', upload_to='media')
 	
-	def __unicode__(self):
-		return self.title + ('%i', self.number)
-	
+
+def getJobTypes():
+	return JOB_TYPES

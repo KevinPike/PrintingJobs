@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>Please work</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap-responsive.css' %}" type="text/css"/>
+</head>
+
+body>
+	<div class="row">
+		<div class="span4 offset8" style="text-align:center;"> <form class="well"><label>Administrator: Eric Pike</label><label>Contact: </label> </form>
+		</div>
+		<div class="span4 offset4" style="text-align: center;"> 
+			<form class="well">
+				<label>Please enter job information:</label>
+				<input id="job" type="text" placeholder="Job Number">
+				<input id="ref" type="text" placeholder="Reference Number">
+				<!--<div class="btn-group">
+					<button class="btn">LC</button><button class="btn">HS</button>
+				</div>-->
+
+				  <div class="control-group">
+				      <select id="controls">
+					<option>LC</option>
+					<option>HS</option>
+				      </select>
+				  </div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			<label>  </label>
+			<!--<label for="success">Job found</label>
+			<button id="success" type="download" class="btn btn-success">Download</button>-->
+
+			<!--<label for="warning">Job found but has been downloaded before, are you sure you want to continue?</label>
+			<button id="warning" type="download" class="btn btn-warning">Download</button>-->
+			</form>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span4 offset4" style="text-align: center;">
+			
+		</div>
+	</div>
+
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+
+</html>

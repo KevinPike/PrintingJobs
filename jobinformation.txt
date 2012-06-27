@@ -16,4 +16,4 @@ use id key as web reference
 job number
 file (don't know how this works)
 bit for lc/hs
-bit for if it's been opened before
+bit for if it's been opened beforenumber
