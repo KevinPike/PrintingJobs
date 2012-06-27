@@ -15,6 +15,6 @@ class Job (models.Model) :
 	)
 	type = models.CharField('Job Type', max_length=2, choices=JOB_TYPES, )
 	file = models.FileField('Upload File', upload_to='media')
-	
+	#need to add completed file
 	def __unicode__(self):
 		return 'J#:' + self.number + ' R#' + unicode(self.id) + ' ' + self.type
