@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import hello, current_datetime, jobRequest, bootstrap
+from views import hello, current_datetime, jobRequest, bootstrap, index
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url('^hello/$', hello),
     url('^time/$', current_datetime),
-    url('^$', jobRequest),
+    url('^$', index),
     url('^base/$', bootstrap),
+    url('^search/$', jobRequest),
 )
