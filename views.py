@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from jobs.models import Job
-from PrintingJobs.bforms import JobForm
+from PrintingJobs.forms import JobForm
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import datetime
