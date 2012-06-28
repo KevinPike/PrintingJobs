@@ -8,7 +8,7 @@ import datetime
 
 def download(request):
     response = HttpResponse(mimetype="application/zip")
-    response["Content-Disposition"] = "attachment; filename=asdf.zip"
+    response["Content-Disposition"] = "attachment; filename=/media/media/asdf.zip"
     return response
 
 def index(request):
