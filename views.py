@@ -6,6 +6,11 @@ from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 import datetime
 
+def download(request):
+    response = HttpResponse(mimetype="application/zip")
+    response["Content-Disposition"] = "attachment; filename=asdf.zip"
+    return response
+
 def index(request):
     if not request.method == 'GET':
         raise Http404
