@@ -11,8 +11,14 @@
     	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
     	<link rel="stylesheet" href="{% static 'css/bootstrap-responsive.css' %}" type="text/css"/>
 	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+<script src="{% static 'js/jquery-1.7.2.js' %}"></script>
+<script src="{% static 'js/jquery.validate.js' %}"></script>
 
-	
+<script>
+  $(document).ready(function(){
+    $("#commentForm").validate();
+  });
+  </script>
 </head>
 <body>
 <div class="span3 offset9">
@@ -22,18 +28,72 @@
 </div></div>
 <div class="span4 offset4">
 <div class="well">
-	<form action="search/" method="get">
+	<form action="/" id="jobForm" method="get">
 		<label>Please enter job information:</label>
-		<input name="job" type="text" placeholder="Job Number">
-		<input name="ref" type="text" placeholder="Reference Number">
+
+		<input id="numberField" name="number" type="text" placeholder="Job Number" class="required">
+		<input id="refField" name="ref" type="text" placeholder="Reference Number" class="required">
 
 		<select name="type">
-			<option>Lettercomm Services</option>
-			<option>Harris Services</option>		</select>
+			<option value="LC">Lettercomm Services</option>
+			<option value="HS">Harris Services</option>		</select>
 		<div>
-        	<input type="submit" class="btn btn-primary"> </div>
+		{% if error %}
+		<div class="alert alert-error">
+			{{error}}
+		</div>
+		{% endif %}
+        	<input type="submit" value="Search" class="btn btn-primary"> </div>
 	</form>
 </div></div>
+
+{% if success %}
+
+<div class="span4 offset4">
+<div class="well">
+<div class="alert alert-success">File found. </div>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>File info:</th>
+			<th>Job #</th>
+			<th>Ref #</th>
+			<th>Type</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th></th>
+			<th>FILL</th>
+			<th>FILL</th>
+			<th>FILL</th>
+		</tr>
+</table>
+<label> Would you like to download?</label>
+<form action="download/" id="downloadForm" method="get">
+<input type="submit" value="Download" class="btn btn-success"></input>
+</form>
+</div>
+</div>
+
+{% endif %}
+
+{% if warning %}
+
+<div class="span4 offset4">
+<div class="well">
+<form action="download/" id="downloadAgainForm" method="get">
+<div class="alert alert-warning">File found but has been downloaded before.</div>
+<label>File information: <br/> Job number: <br/> Reference Number: <br/> Type: <br/> Would you like to download?</label>
+<input type="submit" value="Download" class="btn btn-warning"></input>
+
+</form>
+</div>
+</div>
+
+{% endif %}
+
 <script src="{% static 'js/bootstrap.js' %}"></script>
 </body>
 

@@ -14,6 +14,7 @@
 		</div>
 		<div class="span4 offset4" style="text-align: center;"> 
 			<form class="well">
+				{{ form.as_p }}
 				<label>Please enter job information:</label>
 				<input id="job" type="text" placeholder="Job Number">
 				<input id="ref" type="text" placeholder="Reference Number">
@@ -22,9 +23,9 @@
 				</div>-->
 
 				  <div class="control-group">
-				      <select id="controls">
-					<option>Lettercomm Services</option>
-					<option>Harris Services</option>
+				      <select id="type">
+					<option id="type" value="LC">Lettercomm Services</option>
+					<option id="type" value="HS">Harris Services</option>
 				      </select>
 				  </div>
 				<button type="submit" class="btn btn-primary">Submit</button>

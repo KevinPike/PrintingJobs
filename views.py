@@ -2,19 +2,32 @@ from django.core.context_processors import csrf
 from django.http import HttpResponse, Http404
 from jobs.models import Job
 from PrintingJobs.forms import JobForm
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 import datetime
 
 def index(request):
-    return render_to_response('JobForm.html')
+    if not request.method == 'GET':
+        raise Http404
+    if not ('number' in request.GET and 'ref' in request.GET):
+	return render_to_response('JobForm.html')
+    form = JobForm(request.GET)
+    if not form.is_valid():
+        return render_to_response('JobForm.html', {'error' : 'please fill in the fields'})
+    return render_to_response('JobForm.html', {'success': 'yippee'})
 
 def jobRequest(request):
     if not request.method == 'GET':
         raise Http404
     #look for job with current job and ref, if so, return datafile
     #edit JobForm to have download blocks
-    return HttpResponse(request.GET['job'])
+    #data = {'job': request.GET['job'], 'ref': request.GET['ref'], 'type': request.GET['type']}
+    #form = JobForm(data)
+    form = JobForm(request.GET)
+    if not form.is_valid():
+        error = 'The form was not properly filled out, try again.'
+        return redirect('/', {'error': error})
+    return HttpResponse(form.is_valid())
 
 def bootstrap(request):
     return render_to_response('base.html')
