@@ -7,19 +7,27 @@ from django.template import RequestContext
 import datetime
 
 def download(request):
-    response = HttpResponse(mimetype="application/zip")
-    response["Content-Disposition"] = "attachment; filename=/media/media/asdf.zip"
+    response = HttpResponse(content_type="application/force-download")
+    response["Content-Disposition"] = "attachment; filename=/media/media/hello.txt";
     return response
 
 def index(request):
     if not request.method == 'GET':
         raise Http404
     if not ('number' in request.GET and 'ref' in request.GET):
-	return render_to_response('JobForm.html')
+	    return render_to_response('JobForm.html')
     form = JobForm(request.GET)
     if not form.is_valid():
         return render_to_response('JobForm.html', {'error' : 'please fill in the fields'})
-    return render_to_response('JobForm.html', {'success': 'yippee'})
+    try:
+        job = Job.objects.get(pk=request.GET['ref'],number=request.GET['number'],
+        type=request.GET['type'])
+    except Job.DoesNotExist:
+         return render_to_response('JobForm.html', {'error' : 'please fill in the fields'})
+    #return render_to_response('JobForm.html', {'success': 'yippee', 'file': 'asdf.zip'})
+    if job.used:
+        return render_to_response('JobForm.html', {'job': job, 'warning': job.used})
+    return render_to_response('JobForm.html', {'job': job, 'success': 'success'})
 
 def jobRequest(request):
     if not request.method == 'GET':
