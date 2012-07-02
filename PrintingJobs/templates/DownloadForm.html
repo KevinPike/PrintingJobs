@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="span4 offset4">
+<div class="well">
+{% if success %}
+<div class="alert alert-success">
+File found.</div>
+{% elif warning %}
+<div class="alert alert-warning">
+File found but has been downloaded before.</div>
+{% endif %}
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Job #</th>
+			<th>Ref #</th>
+			<th>Type</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th>{{ job.number }}</th>
+			<th>{{ job.pk }}</th>
+			<th>{{ job.type }}</th>
+		</tr>
+</table>
+<label> Would you like to download?</label>
+<span id="downloadCancel">
+<a href="/download/{{ job.id }}"
+{% if warning %}
+class = "btn btn-warning">Download</a>
+{% elif success %}
+class = "btn btn-success">Download</a>
+{% endif %}
+
+<a href="/" class="btn btn-danger">Cancel</a>
+</div>
+</div>
+</span>
+{% endblock %}

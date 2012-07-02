@@ -1,12 +1,13 @@
 # Django settings for PrintingJobs project.
-import os
-import django
+import os, django, socket
 
 DJANGO_ROOT = os.path.dirname(os.path.realpath(django.__file__))
 SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+if socket.gethostname() == 'kevin-LIFEBOOK-T731':
+    DEBUG = TEMPLATE_DEBUG = True
+else:
+    DEBUG = TEMPLATE_DEBUG = False
 
 ADMINS = (
     # ('Kevin Pike', 'kevin.e.pike@gmail.com'),

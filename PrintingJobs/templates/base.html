@@ -1,51 +1,35 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-
-<html>
+<html lang="en">
 <head>
-    <title>Please work</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
-    <link rel="stylesheet" href="{% static 'css/bootstrap-responsive.css' %}" type="text/css"/>
+	<meta charset="utf-8">
+	<title>Download Jobs</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+    	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css"/>
+    	<link rel="stylesheet" href="{% static 'css/bootstrap-responsive.css' %}" type="text/css"/>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css"/>
+<script src="{% static 'js/jquery-1.7.2.js' %}"></script>
+<script src="{% static 'js/jquery.validate.js' %}"></script>
+
+<script>
+  $(document).ready(function(){
+    $("#jobForm").validate();
+  });
+  </script>
 </head>
-
 <body>
-	<div class="row">
-		<div class="span4 offset8" style="text-align:center;"> <form class="well"><label>Administrator: Eric Pike</label><label>Contact: </label> </form>
-		</div>
-		<div class="span4 offset4" style="text-align: center;"> 
-			<form class="well">
-				{{ form.as_p }}
-				<label>Please enter job information:</label>
-				<input id="job" type="text" placeholder="Job Number">
-				<input id="ref" type="text" placeholder="Reference Number">
-				<!--<div class="btn-group">
-					<button class="btn">LC</button><button class="btn">HS</button>
-				</div>-->
+<div class="span3 offset9">
+<div class="well">
+	<label>Administrator: Eric Pike</label>
+	<label>Contact: </label>
+</div></div>
 
-				  <div class="control-group">
-				      <select id="type">
-					<option id="type" value="LC">Lettercomm Services</option>
-					<option id="type" value="HS">Harris Services</option>
-				      </select>
-				  </div>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			<label>  </label>
-			<!--<label for="success">Job found</label>
-			<button id="success" type="download" class="btn btn-success">Download</button>-->
+{% block content %} {% endblock %}
 
-			<!--<label for="warning">Job found but has been downloaded before, are you sure you want to continue?</label>
-			<button id="warning" type="download" class="btn btn-warning">Download</button>-->
-			</form>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="span4 offset4" style="text-align: center;">
-			
-		</div>
-	</div>
-
-	<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
 </body>
-
 </html>
+

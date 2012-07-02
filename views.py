@@ -4,11 +4,25 @@ from jobs.models import Job
 from PrintingJobs.forms import JobForm
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
-import datetime
+import datetime, mimetypes, os
+from django.core.servers.basehttp import FileWrapper
+from django.conf import settings
+from PrintingJobs.settings import SITE_ROOT
 
-def download(request):
-    response = HttpResponse(content_type="application/force-download")
-    response["Content-Disposition"] = "attachment; filename=/media/media/hello.txt";
+def download(request, reference):
+    job = Job.objects.get(id=reference)
+    job.used = 1
+    job.save()
+    filename = SITE_ROOT + "/public/media/" + unicode(job.file)
+    delimit = unicode(job.file).rsplit('/')
+    print(delimit)
+    download_name = delimit[1]
+    wrapper = FileWrapper(open(filename))
+    content_type = mimetypes.guess_type(filename)[0]
+    print(content_type)
+    response = HttpResponse(wrapper, content_type=content_type)
+    response["Content-Disposition"] = "attachment; filename=%s"%download_name
+    response['Content-Length'] = os.path.getsize(filename)
     return response
 
 def index(request):
@@ -26,8 +40,8 @@ def index(request):
          return render_to_response('JobForm.html', {'error' : 'please fill in the fields'})
     #return render_to_response('JobForm.html', {'success': 'yippee', 'file': 'asdf.zip'})
     if job.used:
-        return render_to_response('JobForm.html', {'job': job, 'warning': job.used})
-    return render_to_response('JobForm.html', {'job': job, 'success': 'success'})
+        return render_to_response('DownloadForm.html', {'job': job, 'warning': job.used})
+    return render_to_response('DownloadForm.html', {'job': job, 'success': 'success'})
 
 def jobRequest(request):
     if not request.method == 'GET':
