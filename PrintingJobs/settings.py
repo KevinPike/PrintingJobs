@@ -6,16 +6,7 @@ SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
 
 if socket.gethostname() == 'kevin-LIFEBOOK-T731':
     DEBUG = TEMPLATE_DEBUG = True
-else:
-    DEBUG = TEMPLATE_DEBUG = False
-
-ADMINS = (
-    # ('Kevin Pike', 'kevin.e.pike@gmail.com'),
-)
-
-MANAGERS = ADMINS
-
-DATABASES = {
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': os.path.join(SITE_ROOT, 'db') + '/development.db', # Or path to database file if using sqlite3.
@@ -25,6 +16,23 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+else:
+    DEBUG = TEMPLATE_DEBUG = False
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'printingjobs', # Or path to database file if using sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': 'root',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+ADMINS = (
+    # ('Kevin Pike', 'kevin.e.pike@gmail.com'),
+)
+
+MANAGERS = ADMINS
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
