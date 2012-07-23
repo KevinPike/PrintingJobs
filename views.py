@@ -11,7 +11,7 @@ from PrintingJobs.settings import SITE_ROOT
 
 def download(request, reference):
     job = Job.objects.get(id=reference)
-    job.used = 1
+    job.downloads += 1
     job.save()
     filename = SITE_ROOT + "/public/media/" + unicode(job.file)
     delimit = unicode(job.file).rsplit('/')
@@ -39,8 +39,8 @@ def index(request):
     except Job.DoesNotExist:
          return render_to_response('JobForm.html', {'error' : 'please fill in the fields'})
     #return render_to_response('JobForm.html', {'success': 'yippee', 'file': 'asdf.zip'})
-    if job.used:
-        return render_to_response('DownloadForm.html', {'job': job, 'warning': job.used})
+    if job.downloads:
+        return render_to_response('DownloadForm.html', {'job': job, 'warning': job.downloads})
     return render_to_response('DownloadForm.html', {'job': job, 'success': 'success'})
 
 def jobRequest(request):
