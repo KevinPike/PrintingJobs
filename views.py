@@ -13,7 +13,7 @@ def download(request, reference):
     job = Job.objects.get(id=reference)
     job.used = 1
     job.save()
-    filename = SITE_ROOT + "/public/media/" + unicode(job.file)
+    filename = SITE_ROOT + "/media/" + unicode(job.file)
     delimit = unicode(job.file).rsplit('/')
     print(delimit)
     download_name = delimit[1]
