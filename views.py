@@ -13,13 +13,11 @@ def download(request, reference):
     job = Job.objects.get(id=reference)
     job.downloads += 1
     job.save()
-    filename = SITE_ROOT + "/public/media/" + unicode(job.file)
+    filename = SITE_ROOT + "/media/" + unicode(job.file)
     delimit = unicode(job.file).rsplit('/')
-    print(delimit)
     download_name = delimit[1]
     wrapper = FileWrapper(open(filename))
     content_type = mimetypes.guess_type(filename)[0]
-    print(content_type)
     response = HttpResponse(wrapper, content_type=content_type)
     response["Content-Disposition"] = "attachment; filename=%s"%download_name
     response['Content-Length'] = os.path.getsize(filename)
@@ -39,9 +37,10 @@ def index(request):
     except Job.DoesNotExist:
          return render_to_response('JobForm.html', {'error' : 'please fill in the fields'})
     #return render_to_response('JobForm.html', {'success': 'yippee', 'file': 'asdf.zip'})
+    filename = unicode(job.file).rsplit('/')[1]
     if job.downloads:
-        return render_to_response('DownloadForm.html', {'job': job, 'warning': job.downloads})
-    return render_to_response('DownloadForm.html', {'job': job, 'success': 'success'})
+        return render_to_response('DownloadForm.html', {'job': job, 'file': filename, 'warning': job.downloads})
+    return render_to_response('DownloadForm.html', {'job': job, 'file': filename,'success': 'success'})
 
 def jobRequest(request):
     if not request.method == 'GET':
