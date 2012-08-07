@@ -14,7 +14,7 @@ class Job (models.Model) :
         ('HS', 'Harris Services'),
     )
     type = models.CharField('Job Type', max_length=2, choices=JOB_TYPES, )
-    used = models.IntegerField('Downloaded', editable=False, default='0')
-    file = models.FileField('Upload File', upload_to='')
+    file = models.FileField('Upload File', upload_to='uploads')
+    downloads = models.IntegerField('Downloaded', editable=False, default='0')
     def __unicode__(self):
         return 'J#:' + unicode(self.number) + ' R#' + unicode(self.id) + ' ' + self.type
