@@ -19,13 +19,18 @@
   </script>
 </head>
 <body>
-<div class="span3 offset9">
-<div class="well">
-	<label>Administrator: Eric Pike</label>
-	<label>Contact: </label>
-</div></div>
+<div><br /></div>
 
 {% block content %} {% endblock %}
+
+<div class="span4 offset4">
+<div class="well">
+    {% block instructions %} {% endblock %}
+	<label class="alert alert-info">Have a question?</label>
+    <label>Contact Eric Pike at <br /></label>
+</div></div>
+
+
 
 <script src="{% static 'js/jquery-1.7.2.min.js' %}"></script>
 <script src="{% static 'js/jquery.validate.js' %}"></script>
