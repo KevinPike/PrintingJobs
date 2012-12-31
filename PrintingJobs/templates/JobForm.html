@@ -4,7 +4,7 @@
 <div class="span4 offset4">
 <div class="well">
 	<form action="/" id="jobForm" method="get">
-		<label>Please enter your job information:</label>
+		<label><b>Please enter your job information:</b></label>
 
 		<input id="numberField" name="number" type="text" placeholder="Job Number" class="required" autocomplete="off">
 		<input id="refField" name="ref" type="text" placeholder="Reference Number" class="required" autocomplete="off">
@@ -22,4 +22,11 @@
 	</form>
 </div></div>
 
+{% endblock %}
+
+{% block instructions %}
+<label class="alert alert-info">Instructions</label>
+<label>To download your job file or zip, <br /> enter in the job number, reference number, <br />
+    and type of your job.</label>
+<br />
 {% endblock %}
