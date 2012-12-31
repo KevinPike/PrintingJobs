@@ -15,7 +15,7 @@ def download(request, reference):
     job.save()
     filename = SITE_ROOT + "/media/" + unicode(job.file)
     delimit = unicode(job.file).rsplit('/')
-    download_name = delimit[1]
+    download_name = delimit[2]
     wrapper = FileWrapper(open(filename))
     content_type = mimetypes.guess_type(filename)[0]
     response = HttpResponse(wrapper, content_type=content_type)
@@ -37,7 +37,7 @@ def index(request):
     except Job.DoesNotExist:
          return render_to_response('JobForm.html', {'error' : 'please fill in the fields'})
     #return render_to_response('JobForm.html', {'success': 'yippee', 'file': 'asdf.zip'})
-    filename = unicode(job.file).rsplit('/')[1]
+    filename = unicode(job.file).rsplit('/')[2]
     if job.downloads:
         return render_to_response('DownloadForm.html', {'job': job, 'file': filename, 'warning': job.downloads})
     return render_to_response('DownloadForm.html', {'job': job, 'file': filename,'success': 'success'})
